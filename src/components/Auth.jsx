@@ -18,7 +18,7 @@ const Auth = ({
             <div className='block bg-white shadow-lg rouned-lg p-4'>
               <div className='text-enter'>
                 <h4 className='text-xl font-semibold mt-1 mb-1 pb-1'>
-                  We are The Lotus Team
+                  Welcome to MernShort
                 </h4>
               </div>
               <form>

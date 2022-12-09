@@ -6,7 +6,7 @@ const Authentication = ({ setuser }) => {
   const [email, setEmail] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
-  const PORT = process.env.REACT_APP_URI;
+  const PORT = import.meta.env.VITE_REACT_APP_URI;
   const handleRegister = async () => {
     setLoading(true);
     try {
