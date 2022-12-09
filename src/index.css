@@ -11,10 +11,19 @@ a:hover {
 body {
     min-width: 320px;
     min-height: 100vh;
+    background: rgb(131, 58, 180);
+    padding: 2rem;
+    background: linear-gradient( 90deg, rgba(131, 58, 180, 1) 0%, rgba(29, 56, 253, 1) 50%);
 }
 
-h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-    text-align: center;
+.container {
+    background-color: aliceblue;
+    min-height: 100vh;
+    min-width: 100%;
+    border-radius: 5px;
+    padding: 12px;
+}
+
+.form-control {
+    width: 100% !important;
 }

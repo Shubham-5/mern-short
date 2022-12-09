@@ -24,7 +24,7 @@ const Authentication = ({ setuser }) => {
           setLoading(false);
         }
       } else {
-        return alert(data.message);
+        alert(data.message);
       }
     } catch (error) {
       console.log(error);
@@ -53,7 +53,7 @@ const Authentication = ({ setuser }) => {
         setEmail("");
         setPassword("");
       } else {
-        return alert(data.message);
+        alert(data.message);
       }
     } catch (err) {
       console.log(err);

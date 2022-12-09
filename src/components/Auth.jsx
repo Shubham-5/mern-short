@@ -18,7 +18,7 @@ const Auth = ({
             <div className='block bg-white shadow-lg rouned-lg p-4'>
               <div className='text-enter'>
                 <h4 className='text-xl font-semibold mt-1 mb-1 pb-1'>
-                  Welcome to MernShort
+                  Welcome to <span className='text-blue-900'>MernShort</span>
                 </h4>
               </div>
               <form>
@@ -73,7 +73,7 @@ const Auth = ({
                     data-mdb-ripple='true'
                     data-mdb-ripple-color='light'
                     onClick={() => setLogin(!isLogin)}>
-                    <a className='text-gray-500' href='#!'>
+                    <a className='text-gray-800' href='#!'>
                       {isLogin ? "Register" : "Login"}
                     </a>
                   </button>

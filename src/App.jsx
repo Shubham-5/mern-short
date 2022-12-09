@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import Home from "./pages/Home";
 import Authentication from "./pages/Authentication";
 
@@ -13,7 +12,7 @@ function App() {
     }
   }, []);
   return (
-    <div className='App'>
+    <div>
       {user ? (
         <Home user={user} setUser={setuser} />
       ) : (

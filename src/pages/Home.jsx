@@ -46,32 +46,27 @@ const Home = ({ user, setUser }) => {
     }
   }, []);
   return (
-    <div className='container'>
-      <div className='flex justify-center align-center'>
+    <div className='container relative'>
+      <div className='flex justify-between align-center'>
         <form onSubmit={(e) => handleShrink(e)}>
           <input
-            className='form-control h-9 m-1 inline-block px-3  text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-            placeholder='enter url..'
+            className='form-control h-9 m-1 inline-block px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
+            placeholder='http://'
             value={origUrl}
             onChange={(e) => setOrigUrl(e.target.value)}
           />
         </form>
-        <button className='h-9 m-1 mb-6 px-7 bg-green-500 font-medium text-xs leading-tight uppercase rounded shadow-sm hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-md transition duration-150 ease-in-out'>
+        <button className='text-white h-9 m-1 mb-6 px-4 bg-green-500 font-medium text-xs leading-tight uppercase rounded shadow-sm hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-md transition duration-150 ease-in-out'>
           Short {isLoading && <Loader />}
-        </button>
-        <button
-          onClick={handleLogout}
-          className='px-7 h-9 m-1 bg-red-200 font-medium text-xs leading-tight uppercase rounded shadow-sm hover:bg-red-200 hover:shadow-md focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out'>
-          Logout
         </button>
       </div>
       <div className='overflow-x-auto'>
         <table className='min-w-full table-auto border-collapse border border-slate-400 text-left '>
           <thead>
             <tr>
-              <th className='border border-slate-500 p-1'>Full URL</th>
-              <th className='border border-slate-500 p-1'>Short URL</th>
-              <th className='border border-slate-500 p-1'>Clicks</th>
+              <th className='border border-slate-500 p-1 text-sm'>Full URL</th>
+              <th className='border border-slate-500 p-1 text-sm'>Short URL</th>
+              <th className='border border-slate-500 p-1 text-sm'>Clicks</th>
             </tr>
           </thead>
           <tbody>
@@ -96,6 +91,11 @@ const Home = ({ user, setUser }) => {
           </tbody>
         </table>
       </div>
+      <button
+        onClick={handleLogout}
+        className='absolute bottom-0 right-2 px-4 my-3 h-9 m-1 bg-gray-500 font-medium text-xs text-white leading-tight uppercase rounded shadow-sm hover:bg-red-200 hover:shadow-md focus:bg-red-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out'>
+        Logout
+      </button>
     </div>
   );
 };
