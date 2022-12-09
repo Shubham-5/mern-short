@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 const Home = ({ user }) => {
   const [origUrl, setOrigUrl] = useState("");
   const [urls, setUrls] = useState([]);
+  const PORT = process.env.REACT_APP_URI;
   const handleShrink = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${process.env.REACT_APP_URI}/short`, {
+      const res = await fetch(`${PORT}/short`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

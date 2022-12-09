@@ -6,11 +6,11 @@ const Authentication = ({ setuser }) => {
   const [email, setEmail] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
-
+  const PORT = process.env.REACT_APP_URI;
   const handleRegister = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.REACT_APP_URI}/api/register`, {
+      const res = await fetch(`${PORT}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Authentication = ({ setuser }) => {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.REACT_APP_URI}/api/login`, {
+      const res = await fetch(`${PORT}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
