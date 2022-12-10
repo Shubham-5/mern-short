@@ -13,7 +13,7 @@ const Auth = ({
   return (
     <>
       <section className='h-full gradient-form'>
-        <div className='container py-12 px-6 w-full'>
+        <div className='container py-12 px-6 w-full flex justify-center items-center'>
           <div className='flex justify-center items-center flex-wrap h-full text-gry-800'>
             <div className='block bg-white shadow-lg rouned-lg p-4'>
               <div className='text-enter'>

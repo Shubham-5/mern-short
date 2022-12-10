@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import Loader from "../components/loader";
+import Toast from "../components/Toast";
 
 const Home = ({ user, setUser }) => {
   const [origUrl, setOrigUrl] = useState("");
   const [urls, setUrls] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [toastUrl, setToastUrl] = useState("");
 
   const PORT = import.meta.env.VITE_REACT_APP_URI;
 
@@ -22,12 +25,14 @@ const Home = ({ user, setUser }) => {
       const data = await res.json();
       if (res.ok) {
         setUrls([...urls, data.savedUrl]);
+        setToastUrl(data.savedUrl.short);
+        setShow(true);
         setLoading(false);
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
+    setOrigUrl("");
     setLoading(false);
   };
   const handleLogout = () => {
@@ -47,6 +52,9 @@ const Home = ({ user, setUser }) => {
   }, []);
   return (
     <div className='container relative'>
+      <div className='absolute left-0 right-0'>
+        {show && <Toast setShow={setShow} toastUrl={toastUrl} />}
+      </div>
       <div className='flex justify-between align-center'>
         <form onSubmit={(e) => handleShrink(e)}>
           <input
@@ -56,7 +64,9 @@ const Home = ({ user, setUser }) => {
             onChange={(e) => setOrigUrl(e.target.value)}
           />
         </form>
-        <button className='text-white h-9 m-1 mb-6 px-4 bg-green-500 font-medium text-xs leading-tight uppercase rounded shadow-sm hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-md transition duration-150 ease-in-out'>
+        <button
+          onClick={handleShrink}
+          className='text-white h-9 m-1 mb-6 px-4 bg-green-500 font-medium text-xs leading-tight uppercase rounded shadow-sm hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-md transition duration-150 ease-in-out'>
           Short {isLoading && <Loader />}
         </button>
       </div>
