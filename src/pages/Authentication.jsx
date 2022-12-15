@@ -1,13 +1,15 @@
 import { useState } from "react";
 
 import Auth from "../components/Auth";
-const Authentication = ({ setuser }) => {
+const Authentication = ({ setuser, setToken }) => {
   const [isLogin, setLogin] = useState(true);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const PORT = import.meta.env.VITE_REACT_APP_URI;
   const handleRegister = async () => {
+    if ((!name || !password, !email)) return alert("All field required");
     setLoading(true);
     try {
       const res = await fetch(`${PORT}/api/register`, {
@@ -15,12 +17,14 @@ const Authentication = ({ setuser }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, name }),
       });
       const data = await res.json();
       if (res.ok) {
         if (data) {
           setuser(data.user);
+          setToken(data.token);
+          localStorage.setItem("auth-token", data.token);
           setLoading(false);
         }
       } else {
@@ -33,6 +37,7 @@ const Authentication = ({ setuser }) => {
   };
 
   const handleLogin = async () => {
+    if ((!password, !email)) return alert("All field required");
     setLoading(true);
     try {
       const res = await fetch(`${PORT}/api/login`, {
@@ -46,8 +51,8 @@ const Authentication = ({ setuser }) => {
       if (res.ok) {
         if (data) {
           setuser(data.user);
-          localStorage.setItem("userId", data.user.id);
-          localStorage.setItem("userEmail", data.user.email);
+          setToken(data.token);
+          localStorage.setItem("auth-token", data.token);
           setLoading(false);
         }
         setEmail("");
@@ -75,6 +80,8 @@ const Authentication = ({ setuser }) => {
         />
       ) : (
         <Auth
+          setName={setName}
+          name={name}
           email={email}
           setEmail={setEmail}
           password={password}

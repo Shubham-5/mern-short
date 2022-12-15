@@ -36,8 +36,7 @@ const Home = ({ user, setUser }) => {
     setLoading(false);
   };
   const handleLogout = () => {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userEmail");
+    localStorage.setItem("auth-token", "");
     setUser(null);
   };
   useEffect(() => {
