@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import Loader from "../components/loader";
-import Toast from "../components/Toast";
 
 const Home = ({ user, setUser }) => {
   const [origUrl, setOrigUrl] = useState("");
   const [urls, setUrls] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [show, setShow] = useState(false);
-  const [toastUrl, setToastUrl] = useState("");
+  const [isCopy, setCopy] = useState(false);
 
   const PORT = import.meta.env.VITE_REACT_APP_URI;
 
   const handleShrink = async (e) => {
+    if (!origUrl) return alert("Enter full url");
     setLoading(true);
     e.preventDefault();
     try {
@@ -25,20 +24,32 @@ const Home = ({ user, setUser }) => {
       const data = await res.json();
       if (res.ok) {
         setUrls([...urls, data.savedUrl]);
-        setToastUrl(data.savedUrl.short);
-        setShow(true);
+        setOrigUrl(data.savedUrl.short);
+        setCopy(true);
         setLoading(false);
+      } else {
+        alert(data.message);
       }
     } catch (error) {
       console.log(error);
     }
-    setOrigUrl("");
     setLoading(false);
   };
+
+  const handleCopy = () => {
+    setLoading(true);
+    navigator.clipboard.writeText(origUrl);
+    alert("Copied");
+    setOrigUrl("");
+    setCopy(false);
+    setLoading(false);
+  };
+
   const handleLogout = () => {
     localStorage.setItem("auth-token", "");
     setUser(null);
   };
+
   useEffect(() => {
     const getShortUrls = async () => {
       const res = await fetch(`${PORT}/urls/${user.id}`);
@@ -50,29 +61,28 @@ const Home = ({ user, setUser }) => {
     }
   }, []);
   return (
-    <div className='container relative'>
-      <div className='absolute left-0 right-0'>
-        {show && <Toast setShow={setShow} toastUrl={toastUrl} />}
-      </div>
-      <div className='flex justify-between align-center'>
+    <div className='container dashboard relative'>
+      <div className='flex justify-between align-center mt-3'>
         <form onSubmit={(e) => handleShrink(e)}>
           <input
             className='form-control h-9 m-1 inline-block px-3 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-            placeholder='http://'
+            placeholder='Enter full url'
             value={origUrl}
             onChange={(e) => setOrigUrl(e.target.value)}
           />
         </form>
+
         <button
-          onClick={handleShrink}
+          onClick={isCopy ? handleCopy : handleShrink}
           className='text-white h-9 m-1 mb-6 px-4 bg-green-500 font-medium text-xs leading-tight uppercase rounded shadow-sm hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-md transition duration-150 ease-in-out'>
-          Short {isLoading && <Loader />}
+          {isCopy ? "Copy" : "Short"} {isLoading && <Loader />}
         </button>
       </div>
       <div className='overflow-x-auto'>
         <table className='min-w-full table-auto border-collapse border border-slate-400 text-left '>
           <thead>
             <tr>
+              <th className='border border-slate-500 p-1 text-sm'>No.</th>
               <th className='border border-slate-500 p-1 text-sm'>Full URL</th>
               <th className='border border-slate-500 p-1 text-sm'>Short URL</th>
               <th className='border border-slate-500 p-1 text-sm'>Clicks</th>
@@ -80,15 +90,16 @@ const Home = ({ user, setUser }) => {
           </thead>
           <tbody>
             {urls.length > 0 &&
-              urls.map((url) => (
+              urls.map((url, i) => (
                 <tr key={url.short}>
+                  <td className='border border-slate-300 p-1'>{i + 1}</td>
                   <td className='border border-slate-300 p-1'>
-                    <a className='text-sm' href={url.full}>
+                    <a className='text-sm text-blue' href={url.full}>
                       {url.full}
                     </a>
                   </td>
                   <td className='border border-slate-300 p-1'>
-                    <a className='text-sm ' href={url.short}>
+                    <a className='text-sm text-blue' href={url.short}>
                       {url.short}
                     </a>
                   </td>

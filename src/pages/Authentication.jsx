@@ -37,7 +37,7 @@ const Authentication = ({ setuser, setToken }) => {
   };
 
   const handleLogin = async () => {
-    if ((!password, !email)) return alert("All field required");
+    if (!password || !email) return alert("All field required");
     setLoading(true);
     try {
       const res = await fetch(`${PORT}/api/login`, {

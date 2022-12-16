@@ -12,16 +12,18 @@ body {
     min-width: 320px;
     min-height: 100vh;
     background: rgb(131, 58, 180);
-    padding: 2rem;
     background: linear-gradient( 90deg, rgba(131, 58, 180, 1) 0%, rgba(29, 56, 253, 1) 50%);
 }
 
 .container {
-    background-color: aliceblue;
     min-height: 100vh;
     min-width: 100%;
     border-radius: 5px;
     padding: 12px;
+}
+
+.dashboard {
+    background-color: aliceblue !important;
 }
 
 .form-control {

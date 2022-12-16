@@ -17,7 +17,7 @@ const Auth = ({
       <section className='h-full gradient-form'>
         <div className='container py-12 px-6 w-full flex justify-center items-center'>
           <div className='flex justify-center items-center flex-wrap h-full text-gry-800'>
-            <div className='block bg-white shadow-lg rouned-lg p-4'>
+            <div className='block bg-white shadow-lg rounded-lg p-8'>
               <div className='text-enter'>
                 <h4 className='text-xl font-semibold mt-1 mb-1 pb-1'>
                   Welcome to <span className='text-blue-900'>MernShort</span>
@@ -40,6 +40,7 @@ const Auth = ({
                 <div className='mb-4'>
                   <input
                     type='email'
+                    required
                     className='form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
                     id='exampleFormControlInput1'
                     placeholder='Email'

@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className='p-2'>
       {user ? (
         <Home user={user} setUser={setuser} />
       ) : (
